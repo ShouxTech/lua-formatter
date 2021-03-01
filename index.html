@@ -1,0 +1,72 @@
+<html>
+    <head>
+		<title>Lua Formatter</title>
+
+		<meta charset = "UTF-8">
+
+		<meta name="author" content="CriShoux">
+		<meta name="description" content="Format Lua code">
+		<meta name="keywords" content="Lua, Lua Formatter, Lua Format, Lua Beautifier, Lua Beautify, Lua Unminifier, Lua Unminify">
+
+		<meta property="og:title" content="Lua Formatter">
+		<meta property="og:description" content="Format Lua code">
+		<meta property="og:type" content="website">
+
+        <script src="bundle.js"></script>
+        <script src="src/ace.js"></script>
+        <script src="src/theme-tomorrow_night_eighties.js"></script>
+        <script src="src/mode-lua.js"></script>
+
+        <style>
+            body {
+				background-color: rgb(25, 25, 25);
+                color: white;
+                font-family: 'Trebuchet MS';
+			}
+
+            #scriptBox {
+                background-color: rgb(35, 35, 35);
+				margin: 20px auto 0 auto;
+				border: 1px solid rgba(255, 255, 255, 0.5);
+                border-radius: 6px;
+                width: 60%;
+                height: 400px;
+                display: block;
+            }
+
+            button {
+				background-color: rgb(30, 30, 30);
+				color: white;
+				border: 1px solid rgba(255, 255, 255, 0.5);
+				border-radius: 6px;
+				margin: 25px auto 0 auto;
+				padding: 5px;
+				width: 40%;
+				height: 40px;
+				cursor: pointer;
+				display: block;
+			}
+        </style>
+    </head>
+    <body>
+        <div id="scriptBox"></div>
+        <button id="scriptBtn">Format</button>
+
+        <script>
+            const { formatText } = require('lua-fmt-ext');
+
+            const scriptBox = ace.edit('scriptBox', {
+                mode: 'ace/mode/lua',
+                theme: 'ace/theme/tomorrow_night_eighties',
+                placeholder: "print('Script goes here!')"
+            });
+
+            const scriptBtn = document.getElementById('scriptBtn');
+
+            scriptBtn.onclick = () => {
+                scriptBox.setValue(formatText(scriptBox.getValue()));
+                //scriptBox.clearSelection();
+            }
+        </script>
+    </body>
+</html>
